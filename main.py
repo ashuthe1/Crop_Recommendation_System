@@ -5,7 +5,7 @@ import streamlit as st
 from web_functions import load_data, train_model
 
 # Import pages
-from Tabs import home, data, predict, visualise
+from Tabs import home, data, predict, visualise, comparison  # Add comparison page
 
 # Configure the app
 st.set_page_config(
@@ -15,7 +15,7 @@ st.set_page_config(
     initial_sidebar_state='auto'
 )
 
-activities = ['Decision Tree Classification', 'Random Forest Classification', 'K-Nearest Neighbor(KNN)', 'Support Vector Machine(SVM)']
+activities = ['Decision Tree Classification', 'Random Forest Classification']  # Add Model Comparison
 option = st.sidebar.selectbox('Which model would you like to use?', activities)
 st.subheader(option)
 
@@ -24,7 +24,8 @@ Tabs = {
     "Home": home,
     "Data Info": data,
     "Prediction": predict,
-    "Visualisation": visualise
+    "Visualisation": visualise,
+    "Model Comparison": comparison  # Add Model Comparison
 }
 
 # Create a sidebar
@@ -41,5 +42,7 @@ if page in ["Prediction", "Visualisation"]:
     Tabs[page].app(df, X, y, option)
 elif page == "Data Info":
     Tabs[page].app(df)
-else:
+elif page == "Home":
     Tabs[page].app()
+else:
+    Tabs[page].app(df, X, y, activities)  # Pass model types to Model Comparison page
