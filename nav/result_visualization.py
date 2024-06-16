@@ -28,6 +28,9 @@ def show(models, metrics, le, X):
     st.subheader("Model Comparison")
     plot_metrics_comparison(metrics_df)
 
+    st.subheader("R2 Score Comparison")
+    plot_r2_score(metrics_df)
+
 def plot_metrics_comparison(metrics_df):
     metrics_df['accuracy'] = metrics_df['accuracy'] * 100
     metrics_df['precision'] = metrics_df['precision'] * 100
@@ -53,3 +56,40 @@ def plot_metrics_comparison(metrics_df):
     sns.heatmap(metrics_df[['accuracy', 'precision']], annot=True, fmt=".2f", cmap="YlGnBu", cbar=False, ax=ax)
     ax.set_title("Heatmap of Model Metrics")
     st.pyplot(fig)
+
+def plot_r2_score(metrics_df):
+    metrics_df['r2_score'] = metrics_df['r2_score'] * 100
+
+    fig, ax = plt.subplots(figsize=(8, 6))
+    sns.barplot(x=metrics_df.index, y=metrics_df['r2_score'], palette='Blues_r')
+    ax.set_title("R2 Score Comparison")
+    ax.set_ylim(0, 100)
+    ax.set_ylabel("R2 Score (%)")
+    ax.set_xlabel("Models")
+    st.pyplot(fig)
+
+if __name__ == "__main__":
+    # Example metrics (replace with actual metrics dictionary)
+    metrics = {
+        'Logistic Regression': {'accuracy': 0.85, 'precision': 0.82, 'r2_score': 0.75},
+        'Decision Tree': {'accuracy': 0.90, 'precision': 0.88, 'r2_score': 0.80},
+        'Random Forest': {'accuracy': 0.92, 'precision': 0.90, 'r2_score': 0.85}
+    }
+
+    # Example models (replace with actual models dictionary)
+    models = {
+        'Logistic Regression': None,  # Replace with actual trained model
+        'Decision Tree': None,  # Replace with actual trained model
+        'Random Forest': None  # Replace with actual trained model
+    }
+
+    # Example label encoder (replace with actual label encoder)
+    le = {'classes_': ['Class1', 'Class2', 'Class3']}  
+
+    # Example feature names (replace with actual feature names)
+    feature_names = ['feature1', 'feature2', 'feature3']
+
+    # Example X data (replace with actual X data)
+    X = pd.DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 9]], columns=feature_names)
+
+    show(models, metrics, le, X)
