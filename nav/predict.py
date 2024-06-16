@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
+import sqlite3
+from database import log_prediction
 
+# Function to show prediction form
 def show(models, metrics, le, feature_names):
     st.title("Crop Recommendation")
 
@@ -11,11 +14,9 @@ def show(models, metrics, le, feature_names):
         st.write(f"Accuracy of {selected_model}: {metrics[selected_model]['accuracy'] * 100:.4f}%")
 
     # Take feature input from the user
-    # Add a subheader
     st.subheader("Select Environmental Factors:")
 
     df = pd.read_csv('./dataset/crop_recommendation.csv')
-    # Take input of features from the user.
     N = st.slider("Nitrogen (N)", int(df["N"].min()), int(df["N"].max()))
     P = st.slider("Phosphorus (P)", int(df["P"].min()), int(df["P"].max()))
     K = st.slider("Potassium (K)", int(df["K"].min()), int(df["K"].max()))
@@ -41,4 +42,25 @@ def show(models, metrics, le, feature_names):
         prediction = model.predict(input_data)
         predicted_crop = le.inverse_transform(prediction)[0]
 
+        # Log prediction into database
+        log_prediction(selected_model, inputs, predicted_crop)
+
         st.success(f"Recommended Crop: {predicted_crop}")
+
+    # Display current timestamp
+    st.write(f"Timestamp: {pd.Timestamp.now()}")
+
+# Main function to execute when script runs directly
+if __name__ == "__main__":
+    # Ensure database initialization
+    from database import initialize_database
+    initialize_database()
+
+    # Example of calling show() function directly
+    # This is optional and depends on how your app is structured
+    # and how you are testing/running it
+    models = {}  # Replace with actual models
+    metrics = {}  # Replace with actual metrics
+    le = {}  # Replace with actual label encoder
+    feature_names = []  # Replace with actual feature names
+    show(models, metrics, le, feature_names)

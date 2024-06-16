@@ -6,5 +6,7 @@ pip install -r requirements.txt
 ```
 ## Run Application
 ```
+source venv/bin/activate
+python3 train_model.py
 streamlit run main.py
 ```

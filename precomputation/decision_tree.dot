@@ -4,7 +4,7 @@ edge [fontname="helvetica"] ;
 0 [label="rainfall <= 30.393\ngini = 0.954\nsamples = 1540\nvalue = [66, 74, 74, 66, 67, 70, 72, 77, 66, 64, 78, 74\n68, 66, 70, 76, 75, 63, 63, 62, 72, 77]\nclass = lentil", fillcolor="#ffffff"] ;
 1 [label="gini = 0.0\nsamples = 76\nvalue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0\n0, 76, 0, 0, 0, 0, 0, 0]\nclass = muskmelon", fillcolor="#8f39e5"] ;
 0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
-2 [label="K <= 140.0\ngini = 0.952\nsamples = 1464\nvalue = [66, 74, 74, 66, 67, 70, 72, 77, 66, 64, 78, 74\n68, 66, 70, 0, 75, 63, 63, 62, 72, 77]\nclass = lentil", fillcolor="#ffffff"] ;
+2 [label="P <= 107.5\ngini = 0.952\nsamples = 1464\nvalue = [66, 74, 74, 66, 67, 70, 72, 77, 66, 64, 78, 74\n68, 66, 70, 0, 75, 63, 63, 62, 72, 77]\nclass = lentil", fillcolor="#ffffff"] ;
 0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
 3 [label="humidity <= 73.667\ngini = 0.947\nsamples = 1321\nvalue = [0, 74, 74, 66, 67, 70, 72, 0, 66, 64, 78, 74\n68, 66, 70, 0, 75, 63, 63, 62, 72, 77]\nclass = lentil", fillcolor="#ffffff"] ;
 2 -> 3 ;

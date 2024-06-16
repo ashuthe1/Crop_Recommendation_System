@@ -66,7 +66,7 @@ for name, model in models.items():
     # Save Decision Tree model and visualize up to depth 3
     if name == 'Decision Tree':
         dot_file_path = 'precomputation/decision_tree.dot'
-        export_graphviz(model, out_file=dot_file_path, feature_names=X.columns, class_names=le.classes_, filled=True, rounded=True, max_depth=3)  # Limit depth to 3
+        export_graphviz(model, out_file=dot_file_path, feature_names=X.columns, class_names=le.classes_, filled=True, rounded=True, max_depth=3)
 
 # Save models, metrics, and le to files
 models_file = 'precomputation/models.pkl'
