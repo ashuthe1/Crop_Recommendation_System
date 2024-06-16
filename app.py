@@ -1,7 +1,7 @@
 import streamlit as st
 import pickle
 import pandas as pd
-from nav import home, predict, visualize, logs
+from nav import home, predict, result_visualization, logs, data_analysis  # Updated imports with renamed files
 
 # Load the precomputed models, metrics, and label encoder
 models_file = 'precomputation/models.pkl'
@@ -48,7 +48,8 @@ st.markdown("""
     <div class="navbar">
         <a href="?page=home" id="link-home" target="_self">Home</a>
         <a href="?page=predict" id="link-predict" target="_self">Predict</a>
-        <a href="?page=visualize" id="link-visualize" target="_self">Visualize</a>
+        <a href="?page=resultVisualization" id="link-result-visualization" target="_self">Result Visualization</a>
+        <a href="?page=dataAnalysis" id="link-data-analysis" target="_self">Data Analysis</a>
         <a href="?page=logs" id="link-logs" target="_self">Logs</a>
     </div>
 """, unsafe_allow_html=True)
@@ -61,8 +62,10 @@ if page == "home":
     home.show()
 elif page == "predict":
     predict.show(models, metrics, le, X.columns)
-elif page == "visualize":
-    visualize.show(models, metrics, le, X)
+elif page == "resultVisualization":
+    result_visualization.show(models, metrics, le, X)
+elif page == "dataAnalysis":
+    data_analysis.main()
 elif page == "logs":
     logs.show_logs()
 else:

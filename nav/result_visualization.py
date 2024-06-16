@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 from sklearn.tree import export_graphviz
 import pydotplus
-from PIL import Image
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -23,9 +22,7 @@ def show(models, metrics, le, X):
         )
         
         graph = pydotplus.graph_from_dot_data(dot_data)
-        
         image = graph.create_png()
-        
         st.image(image, use_column_width=True)
 
     st.subheader("Model Comparison")
@@ -55,10 +52,4 @@ def plot_metrics_comparison(metrics_df):
     fig, ax = plt.subplots(figsize=(10, 6))
     sns.heatmap(metrics_df[['accuracy', 'precision']], annot=True, fmt=".2f", cmap="YlGnBu", cbar=False, ax=ax)
     ax.set_title("Heatmap of Model Metrics")
-    st.pyplot(fig)
-
-    fig, ax = plt.subplots(figsize=(10, 6))
-    metrics_df[['accuracy', 'precision']].plot(kind='line', marker='o', ax=ax)
-    ax.set_title("Line Plot of Model Metrics")
-    ax.set_ylim(0, 100)
     st.pyplot(fig)
