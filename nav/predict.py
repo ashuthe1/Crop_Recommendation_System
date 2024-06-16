@@ -47,9 +47,6 @@ def show(models, metrics, le, feature_names):
 
         st.success(f"Recommended Crop: {predicted_crop}")
 
-    # Display current timestamp
-    st.write(f"Timestamp: {pd.Timestamp.now()}")
-
 # Main function to execute when script runs directly
 if __name__ == "__main__":
     # Ensure database initialization
